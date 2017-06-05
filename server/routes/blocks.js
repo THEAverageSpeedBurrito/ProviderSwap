@@ -21,6 +21,7 @@ router.post('/blocks/new', (req, res) => {
   knex('blocks')
   .insert(newBlock, '*')
   .then((response) => {
+    console.log('User added a new block to their schedule');
     res.send(response);
   })
 
@@ -33,6 +34,7 @@ router.get('/blocks/:id', (req, res) => {
   knex('blocks')
   .where('user_id', id)
   .then((blocks) => {
+    console.log('Getting blocks for user with id', id);
     res.send(blocks);
   })
 })
