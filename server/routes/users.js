@@ -14,24 +14,24 @@ const bcrypt = require('bcrypt');
 
 //Post new user
 router.post('/users/new', (req, res) => {
-  var {name, email, password, profileUrl} = req.body;
+  var {name, username, password, profileImg} = req.body;
 
   var passwordHash = bcrypt.hashSync(password, 10)
 
   var newUser = {
     name,
-    email,
+    username,
     password: passwordHash,
-    profileUrl
+    profile_img: profileImg
   }
 
   knex('users')
-  .where('email', req.body.email)
+  .where('username', req.body.username)
   .then((dataCheck) => {
-    //Check to see if email already exists
+    //Check to see if user already exists
     if(dataCheck.length > 0){
       console.log('user already found');
-      res.send('An account using that email already exists')
+      res.send('An account with that username already exists')
     }else{
       console.log('Creating new account');
       //Insert new user into the database
@@ -43,6 +43,34 @@ router.post('/users/new', (req, res) => {
       })
     }
   })
+})
+
+//Login/get existing user
+router.get('/users/login', (req, res) => {
+  var {username, password} = req.body;
+
+  if(username && password) {
+    //Get users hashed password
+    knex('users')
+    .where('username', username)
+    .then((userData) => {
+      if(userData.length > 0) {
+        userData = userData[0];
+
+        //compare passwords
+        if(bcrypt.compareSync(password, userData.password)){
+          res.send(userData)
+        }else{
+          res.send('incorrect password')
+        }
+      }else{
+        //Response if no user
+        res.send('No user with that email found')
+      }
+    })
+  }else{
+    res.send('Incorrect login credentials')
+  }
 })
 
 
