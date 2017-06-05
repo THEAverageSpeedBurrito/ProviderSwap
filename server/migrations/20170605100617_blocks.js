@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTable('blocks', (table) => {
     table.increments('id');
     table.integer('user_id').references('id').inTable('users').onDelete('CASCADE').index();
-    table.timestamp('start_time').notNullable();
+    table.string('start_time').notNullable();
   })
 };
 
