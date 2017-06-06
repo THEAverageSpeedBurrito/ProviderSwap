@@ -4,6 +4,7 @@ const router = express.Router();
 
 const knex = require('../knex');
 const bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 
 //Middleware
 
@@ -57,19 +58,26 @@ router.get('/users/login/:username/:password', (req, res) => {
 
         //compare passwords
         if(bcrypt.compareSync(password, userData.password)){
-          res.send(userData)
+          var localData = {
+            id: userData.id,
+            username: userData.username,
+            password: userData.password,
+            profileImg: userData.profile_img
+          }
+          res.send(localData);
         }else{
-          res.send('incorrect password')
+          res.status(401).send('incorrect password')
         }
       }else{
         //Response if no user
-        res.send('No user with that email found')
+        res.status(401).send('No user with that email found')
       }
     })
   }else{
     res.send('Incorrect login credentials')
   }
 })
+
 
 
 module.exports = router;

@@ -17,16 +17,25 @@ export class LandingComponent implements OnInit {
 
   ngOnInit() {
     console.log("Landing component initialized")
+
+    if(localStorage.getItem('token')){
+      var token = localStorage.getItem('token')
+      window.location.href = '/dashboard'
+    }
   }
 
   login() {
     if(this.username && this.password){
-    console.log(this.username, this.password)
 
     request
     .get(`${this.API_URL}/users/login/${this.username}/${this.password}`)
     .end((err, res) => {
-      console.log(res);
+      if(res.statusCode === 200){
+        localStorage.setItem('token', res.text)
+        window.location.href = '/dashboard'
+      }else{
+        //Handle bad request here
+      }
     })
 
     }else{
