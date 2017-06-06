@@ -1,6 +1,15 @@
 const express = require('express');
 const server = express();
 
+const cors = require('cors');
+server.use(cors());
+
+const bodyparser = require('body-parser')
+server.use(bodyparser.json());
+server.use(bodyparser.urlencoded({
+  extended: false
+}));
+
 const port = process.env.PORT || 5000;
 
 const users = require('./server/routes/users');

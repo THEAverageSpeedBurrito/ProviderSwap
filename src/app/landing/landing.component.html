@@ -4,11 +4,19 @@
       <h2>Provider Swap</h2>
     </div>
     <div class="center twelve columns">
-      <input type="text" placeholder="Username" id="loginUsername">
-      <input type="text" placeholder="Password" id="loginPassword" >
+      <input
+        type="text"
+        placeholder="Username"
+        [(ngModel)]="username"
+      >
+      <input
+        type="text"
+        placeholder="Password"
+        [(ngModel)]="password"
+      >
     </div>
     <div class="center twelve columns">
-      <a routerLink="/dashboard"><button class="button-primary">Login</button></a>
+      <button (click)="login()" class="button-primary">Login</button>
     </div>
   </div>
 </div>

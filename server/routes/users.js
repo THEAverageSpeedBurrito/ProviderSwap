@@ -3,12 +3,9 @@ const express = require('express');
 const router = express.Router();
 
 const knex = require('../knex');
+const bcrypt = require('bcrypt');
 
 //Middleware
-const bodyParser = require('body-parser');
-router.use(bodyParser.json());
-
-const bcrypt = require('bcrypt');
 
 //Routes
 
@@ -46,8 +43,9 @@ router.post('/users/new', (req, res) => {
 })
 
 //Login/get existing user
-router.get('/users/login', (req, res) => {
-  var {username, password} = req.body;
+router.get('/users/login/:username/:password', (req, res) => {
+  var {username, password} = req.params;
+  console.log(username, password);
 
   if(username && password) {
     //Get users hashed password
