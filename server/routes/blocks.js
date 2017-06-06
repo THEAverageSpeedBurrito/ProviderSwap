@@ -11,12 +11,14 @@ router.use(bodyParser.json());
 //routes
 
 //Claim a new block
-router.post('/blocks/new', (req, res) => {
+router.post('/blocks/new/:id/:start/:day', (req, res) => {
 
   var newBlock = {
-    user_id: req.body.userId,
-    start_time: req.body.startTime
+    user_id: req.params.id,
+    start_time: req.params.start,
+    day: req.params.day
   }
+  console.log(newBlock);
 
   knex('blocks')
   .insert(newBlock, '*')
