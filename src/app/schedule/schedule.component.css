@@ -1,0 +1,26 @@
+.schedule-container {
+  width: 100%;
+  /*border: 1px solid black*/
+}
+
+.timeblock {
+  width: 100%;
+  height: 27px;
+  display: flex;
+}
+
+.timeslot {
+  flex-grow: 1;
+  border: 1px solid lightgray;
+  background-color: ghostwhite;
+  text-align: center;
+  margin: 1px;
+  transition: 0.2s;
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+}
+
+.timeslot:active {
+  background-color: #33C3F0;
+}

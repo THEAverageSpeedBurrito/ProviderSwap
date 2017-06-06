@@ -9,7 +9,15 @@ export class DashboardComponent implements OnInit {
 
   constructor() { }
 
+  userData = JSON.parse(localStorage.getItem('token'));
+  section = 0;
+
   ngOnInit() {
+    console.log(this.userData);
+  }
+
+  setSection(section) {
+    this.section = section
   }
 
 }

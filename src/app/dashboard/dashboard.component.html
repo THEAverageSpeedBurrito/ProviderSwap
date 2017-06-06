@@ -1,3 +1,30 @@
-<p>
-  dashboard works!
-</p>
+<div class="mobile-container" *ngIf="section === 0">
+  <div class="abs-center center row">
+    <div class="twelve columns">
+      <button class="button-primary uniform" (click)="setSection(1)">My Schedule</button>
+    </div>
+    <div class="twelve columns">
+      <button class="button-primary uniform" (click)="setSection(2)">Drop Shifts</button>
+    </div>
+    <div class="twelve columns">
+      <button class="button-primary uniform" (click)="setSection(3)">Get Shifts</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="section !== 0">
+  <div class="top-menu center">
+    <button class="full-button" (click)="setSection(0)">Menu</button>
+  </div>
+  <div class="dashboard-container">
+    <div class="section" *ngIf="section === 1">
+      <app-schedule></app-schedule>
+    </div>
+    <div class="section" *ngIf="section === 2">
+      Drop Shifts
+    </div>
+    <div class="section" *ngIf="section === 3">
+      Pick Up shifts
+    </div>
+  </div>
+</div>

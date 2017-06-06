@@ -7,6 +7,7 @@ import {Routes, RouterModule} from "@angular/router"
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     LandingComponent,
-    DashboardComponent
+    DashboardComponent,
+    ScheduleComponent
   ],
   imports: [
     BrowserModule,

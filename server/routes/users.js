@@ -60,6 +60,7 @@ router.get('/users/login/:username/:password', (req, res) => {
         if(bcrypt.compareSync(password, userData.password)){
           var localData = {
             id: userData.id,
+            name: userData.name,
             username: userData.username,
             password: userData.password,
             profileImg: userData.profile_img

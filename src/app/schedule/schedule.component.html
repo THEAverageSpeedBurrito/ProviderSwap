@@ -1,0 +1,13 @@
+<div class="schedule-container">
+  <div *ngFor="let block of blocks">
+    <div class="timeblock">
+      <div class="timeslot" (click)="claimBlock(block, 1)">{{block}}</div>
+      <div class="timeslot" (click)="claimBlock(block, 2)">{{block}}</div>
+      <div class="timeslot" (click)="claimBlock(block, 3)">{{block}}</div>
+      <div class="timeslot" (click)="claimBlock(block, 4)">{{block}}</div>
+      <div class="timeslot" (click)="claimBlock(block, 5)">{{block}}</div>
+      <div class="timeslot" (click)="claimBlock(block, 6)">{{block}}</div>
+      <div class="timeslot" (click)="claimBlock(block, 7)">{{block}}</div>
+    </div>
+  </div>
+</div>
