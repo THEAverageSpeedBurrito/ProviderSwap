@@ -20,4 +20,9 @@ export class DashboardComponent implements OnInit {
     this.section = section
   }
 
+  logout() {
+    localStorage.clear();
+    window.location.href = '/';
+  }
+
 }
