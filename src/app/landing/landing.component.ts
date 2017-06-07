@@ -14,6 +14,12 @@ export class LandingComponent implements OnInit {
   API_URL = 'http://localhost:5000/api'
   username = ""
   password = ""
+  register = false;
+  registerData = {
+    name: '',
+    username: '',
+    password: ''
+  }
 
   ngOnInit() {
     console.log("Landing component initialized")
@@ -43,6 +49,27 @@ export class LandingComponent implements OnInit {
       console.log('invalid')
     }
 
+  }
+
+  submitRegister() {
+    var {name, username, password} = this.registerData
+
+    if(name != '' && username != '' && password != ''){
+      //Post a new user
+      request
+      .post(`${this.API_URL}/users/new`)
+      .send({
+        name,
+        username,
+        password
+      })
+      .then((res) => {
+        localStorage.setItem('token', res.text)
+        window.location.href = '/dashboard'
+      })
+    }else{
+      console.log('Fill out required fields')
+    }
   }
 
 }

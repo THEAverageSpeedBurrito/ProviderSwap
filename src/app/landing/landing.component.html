@@ -1,24 +1,58 @@
 <div class="mobile-container">
   <div class="abs-center row">
-    <div class="center twelve columns">
-      <h2>Provider Swap</h2>
+    <div *ngIf="!register">
+      <div class="center twelve columns">
+        <h2>Provider Swap</h2>
+      </div>
+      <div class="center twelve columns">
+        <input
+          type="text"
+          placeholder="Username"
+          [(ngModel)]="username"
+        >
+      </div>
+      <div class="center twelve columns">
+        <input
+          type="password"
+          placeholder="Password"
+          [(ngModel)]="password"
+        >
+      </div>
+      <div class="center twelve columns">
+        <button (click)="login()" class="button-primary">Login</button>
+      </div>
+      <div class="center twelve columns">
+        <button (click)="register = true">Register</button>
+      </div>
     </div>
-    <div class="center twelve columns">
-      <input
-        type="text"
-        placeholder="Username"
-        [(ngModel)]="username"
-      >
-    </div>
-    <div class="center twelve columns">
-      <input
-        type="text"
-        placeholder="Password"
-        [(ngModel)]="password"
-      >
-    </div>
-    <div class="center twelve columns">
-      <button (click)="login()" class="button-primary">Login</button>
+    <div *ngIf="register">
+      <div class="center twelve columns">
+        <h2>Provider Swap</h2>
+      </div>
+      <div class="center twelve columns">
+        <input
+          type="text"
+          placeholder="Name"
+          [(ngModel)]="registerData.name"
+        >
+      </div>
+      <div class="center twelve columns">
+        <input
+          type="text"
+          placeholder="Username"
+          [(ngModel)]="registerData.username"
+        >
+      </div>
+      <div class="center twelve columns">
+        <input
+          type="password"
+          placeholder="Password"
+          [(ngModel)]="registerData.password"
+        >
+      </div>
+      <div class="center twelve columns">
+        <button (click)="submitRegister()">Register</button>
+      </div>
     </div>
   </div>
 </div>
