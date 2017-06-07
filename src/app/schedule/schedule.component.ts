@@ -46,10 +46,12 @@ export class ScheduleComponent implements OnInit {
           return false;
         }
       })
-      console.log(this.claimedBlocks)
     }else{
       this.activateBlocks(id);
-      this.claimedBlocks.push([block, day]);
+      this.claimedBlocks.push({
+        start_time: block,
+        day: day
+      });
 
       request
       .post(`${this.API_URL}/blocks/new/${this.userData.id}/${block}/${day}`)
