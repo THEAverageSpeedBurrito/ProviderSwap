@@ -41,4 +41,22 @@ router.get('/blocks/:id', (req, res) => {
   })
 })
 
+//Delete single blocks
+router.delete('/blocks/delete/:user_id/:start/:day', (req, res) => {
+  var {user_id, start, day} = req.params;
+  console.log(req.params);
+
+  knex('blocks')
+  .where({
+    user_id: user_id,
+    start_time: start,
+    day: day
+  })
+  .del()
+  .then(() => {
+    console.log('Block Deleted')
+    res.send('Block Deleted')
+  })
+})
+
 module.exports = router;

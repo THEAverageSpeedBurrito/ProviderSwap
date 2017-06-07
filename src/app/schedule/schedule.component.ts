@@ -28,7 +28,7 @@ export class ScheduleComponent implements OnInit {
       //Highlight claimed blocks
       this.claimedBlocks.forEach((block) => {
         var id = `${block.start_time}${block.day}`
-        activateBlocks(id);
+        this.activateBlocks(id);
       })
     })
   }
@@ -42,42 +42,41 @@ export class ScheduleComponent implements OnInit {
         if(!(blk.start_time === block && blk.day === day)){
           return true;
         }else{
-          deactivateBlocks(id)
+          this.deactivateBlocks(id, block, day)
           return false;
         }
       })
       console.log(this.claimedBlocks)
     }else{
-      activateBlocks(id);
+      this.activateBlocks(id);
       this.claimedBlocks.push([block, day]);
-    }
-  }
 
-  //Save selected blocks to db
-  saveBlocks() {
-    // console.log(this.claimedBlocks)
-
-    this.claimedBlocks.map((block) => {
       request
-      .post(`${this.API_URL}/blocks/new/${this.userData.id}/${block[0]}/${block[1]}`)
+      .post(`${this.API_URL}/blocks/new/${this.userData.id}/${block}/${day}`)
       .end((err, res) => {
         console.log(res);
       })
+    }
+  }
+
+  deactivateBlocks(id, block, day) {
+    document.getElementById(id).style.backgroundColor = 'white';
+
+    request
+    .del(`${this.API_URL}/blocks/delete/${this.userData.id}/${block}/${day}`)
+    .end((err, res) => {
+      console.log(res);
     })
+  }
+
+  activateBlocks(id) {
+    document.getElementById(id).style.backgroundColor = 'dodgerblue';
   }
 
 }
 
 
 //Helper Functions
-
-function activateBlocks(id) {
-  document.getElementById(id).style.backgroundColor = 'dodgerblue';
-}
-
-function deactivateBlocks(id) {
-
-}
 
 function isActive(id) {
   return document.getElementById(id).style.backgroundColor === 'dodgerblue';
