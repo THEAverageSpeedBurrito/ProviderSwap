@@ -28,18 +28,34 @@ export class ScheduleComponent implements OnInit {
       //Highlight claimed blocks
       this.claimedBlocks.forEach((block) => {
         var id = `${block.start_time}${block.day}`
-        document.getElementById(id).style.backgroundColor = 'dodgerblue';
+        activateBlocks(id);
       })
     })
   }
 
   claimBlock(block, day) {
-    this.claimedBlocks.push([block, day]);
+    var id = `${block}${day}`
+
+    if(isActive(id)){
+      //Remove block from active blocks
+      this.claimedBlocks = this.claimedBlocks.filter((blk) => {
+        if(!(blk.start_time === block && blk.day === day)){
+          return true;
+        }else{
+          deactivateBlocks(id)
+          return false;
+        }
+      })
+      console.log(this.claimedBlocks)
+    }else{
+      activateBlocks(id);
+      this.claimedBlocks.push([block, day]);
+    }
   }
 
   //Save selected blocks to db
   saveBlocks() {
-    console.log(this.claimedBlocks)
+    // console.log(this.claimedBlocks)
 
     this.claimedBlocks.map((block) => {
       request
@@ -50,4 +66,19 @@ export class ScheduleComponent implements OnInit {
     })
   }
 
+}
+
+
+//Helper Functions
+
+function activateBlocks(id) {
+  document.getElementById(id).style.backgroundColor = 'dodgerblue';
+}
+
+function deactivateBlocks(id) {
+
+}
+
+function isActive(id) {
+  return document.getElementById(id).style.backgroundColor === 'dodgerblue';
 }
